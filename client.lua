@@ -47,8 +47,6 @@ RegisterCommand("checktint", function()
 
     if ESX.PlayerData.job and ESX.PlayerData.job.name == 'police' then
         if vehicle and distance <= 5 then
-            exports['pogressBar']:drawBar(3000, 'Checking Window Tint')
-
             SetDisplay(true)
 
             if GetVehicleWindowTint(vehicle) == -1  then
