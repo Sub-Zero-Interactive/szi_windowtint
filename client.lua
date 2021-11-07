@@ -23,7 +23,7 @@ local tint = nil
 local display = false
 
 RegisterCommand("checktint", function()
-    local vehicle, distance = ESX.Game.GetClosestVehicle()
+    local vehicle = GetVehiclePedIsUsing(PlayerPedId(), false)
 
         if vehicle and distance <= 5 then
             SetDisplay(true)
