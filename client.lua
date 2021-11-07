@@ -51,7 +51,7 @@ local display = false
 
 RegisterCommand("checktint", function()
     if PlayerJob.name == "police" and onDuty then
-        local vehicle, distance = ESX.Game.GetClosestVehicle()
+        local vehicle, distance = QBCore.Functions.GetClosestVehicle()
         if vehicle and distance <= 5 then
             SetDisplay(true)
 
