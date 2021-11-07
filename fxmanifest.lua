@@ -11,5 +11,3 @@ files {
 }
 
 client_script 'client.lua'
-
-dependency 'es_extended'
