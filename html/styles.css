@@ -1,0 +1,83 @@
+/* Copyright (C) 2021 Sub-Zero Interactive
+
+All rights reserved.
+
+Permission is hereby granted, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software with 'All rights reserved'. Even if 'All rights reserved' is very clear :
+
+  You shall not sell and/or resell this software
+  The rights to use, modify and merge
+  The above copyright notice and this permission notice shall be included in all copies and files of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. */
+
+body {
+    background: none !important;
+  }
+  
+  :root{
+    --color-red: #ca2f2f;
+  }
+  
+  @font-face {
+    font-family: digital;
+    src: url(digital-7.ttf);
+  }
+  
+  #container {
+    position: fixed;
+    top: 50%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 600px;
+    width: 350px;
+    background-size: cover;
+    flex-direction: column;
+    
+  }
+    
+  .green{
+    background: #54BF54;
+  }
+  
+  .red{
+    background: #a30606;
+  }
+  
+  
+  .screen{
+    position: absolute;
+    top: 75px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .middle{
+    font-family: digital;
+    font-size: 25px;
+    font-weight: 100;
+    height: 43x;
+    margin: 0px;
+  }
+  
+  .image{
+    background-image: url('./windowtint.png');
+    margin-left: 40px;
+    width: 580px;
+    height: 680px;
+    left: -44%;
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: -100;
+  }
