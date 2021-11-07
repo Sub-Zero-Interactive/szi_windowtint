@@ -19,33 +19,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 --]]
-ESX = nil
-
-Citizen.CreateThread(function()
-	while ESX == nil do
-		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-		Citizen.Wait(0)
-	end
-
-	while ESX.GetPlayerData().job == nil do
-		Citizen.Wait(10)
-	end
-
-	ESX.PlayerData = ESX.GetPlayerData()
-end)
-
-RegisterNetEvent('esx:setJob')
-AddEventHandler('esx:setJob', function(job)
-	ESX.PlayerData.job = job
-end)
-
 local tint = nil
 local display = false
 
 RegisterCommand("checktint", function()
     local vehicle, distance = ESX.Game.GetClosestVehicle()
 
-    if ESX.PlayerData.job and ESX.PlayerData.job.name == 'police' then
         if vehicle and distance <= 5 then
             SetDisplay(true)
 
@@ -92,11 +71,8 @@ RegisterCommand("checktint", function()
                     textColor = '--color-black'
                 })
             end
-        else 
-            ESX.ShowNotification("No Vehicle Nearby")
         end
         FreezeEntityPosition(PlayerPedId(), false)
-    end
 end, false)
 
 function SetDisplay(bool)
@@ -115,18 +91,6 @@ RegisterNUICallback("exit", function(data)
         tint = 'None',
         textColor = '--color-black'
     })
-end)
-
-Citizen.CreateThread(function()
-    while display do
-        Citizen.Wait(0)
-        DisableControlAction(0, 1, display) -- LookLeftRight
-        DisableControlAction(0, 2, display) -- LookUpDown
-        DisableControlAction(0, 142, display) -- MeleeAttackAlternate
-        DisableControlAction(0, 18, display) -- Enter
-        DisableControlAction(0, 322, display) -- ESC
-        DisableControlAction(0, 106, display) -- VehicleMouseControlOverride
-    end
 end)
 
 RegisterNetEvent('szi_windowtint:displayTint')
