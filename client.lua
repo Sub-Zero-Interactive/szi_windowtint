@@ -19,31 +19,38 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 --]]
-ESX = nil
+local PlayerJob = {}
+local onDuty = false
 
 Citizen.CreateThread(function()
-	while ESX == nil do
-		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-		Citizen.Wait(0)
-	end
-
-	while ESX.GetPlayerData().job == nil do
-		Citizen.Wait(10)
-	end
-
-	ESX.PlayerData = ESX.GetPlayerData()
+    Wait(1000)
+    if QBCore.Functions.GetPlayerData().job ~= nil and next(QBCore.Functions.GetPlayerData().job) then
+        PlayerJob = QBCore.Functions.GetPlayerData().job
+    end
 end)
 
-RegisterNetEvent('esx:setJob')
-AddEventHandler('esx:setJob', function(job)
-	ESX.PlayerData.job = job
+RegisterNetEvent('QBCore:Client:OnPlayerLoaded')
+AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
+    PlayerJob = QBCore.Functions.GetPlayerData().job
+    onDuty = true
+end)
+
+RegisterNetEvent('QBCore:Client:SetDuty')
+AddEventHandler('QBCore:Client:SetDuty', function(duty)
+    onDuty = duty
+end)
+
+RegisterNetEvent('QBCore:Client:OnJobUpdate')
+AddEventHandler('QBCore:Client:OnJobUpdate', function(JobInfo)
+    PlayerJob = JobInfo
+    onDuty = true
 end)
 
 local tint = nil
 local display = false
 
 RegisterCommand("checktint", function()
-    if ESX.PlayerData.job and ESX.PlayerData.job.name == 'police' then
+    if PlayerJob.name == "police" and onDuty then
         local vehicle, distance = ESX.Game.GetClosestVehicle()
         if vehicle and distance <= 5 then
             SetDisplay(true)
@@ -92,7 +99,7 @@ RegisterCommand("checktint", function()
                 })
             end
         else 
-            ESX.ShowNotification("No Vehicle Nearby")
+             QBCore.Functions.Notify("No Vehicle Nearby")
         end
         FreezeEntityPosition(PlayerPedId(), false)
     end
