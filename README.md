@@ -24,6 +24,9 @@ git clone https://github.com/Sub-Zero-Interactive/szi_windowtint [szi]/szi_windo
 ensure szi_windowtint
 ```
 
+## Directions to use
+- If you have the job police do /checktint
+
 # Legal
 ### License
 szi_windowtint - This is a script that allows police to check vehicle window tints.
