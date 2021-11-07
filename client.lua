@@ -43,9 +43,8 @@ local tint = nil
 local display = false
 
 RegisterCommand("checktint", function()
-    local vehicle, distance = ESX.Game.GetClosestVehicle()
-
     if ESX.PlayerData.job and ESX.PlayerData.job.name == 'police' then
+        local vehicle, distance = ESX.Game.GetClosestVehicle()
         if vehicle and distance <= 5 then
             SetDisplay(true)
 
