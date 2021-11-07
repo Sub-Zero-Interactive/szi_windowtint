@@ -23,9 +23,7 @@ local tint = nil
 local display = false
 
 RegisterCommand("checktint", function()
-    local vehicle = GetVehiclePedIsUsing(PlayerPedId(), false)
-
-        if vehicle and distance <= 5 then
+        if IsPedInAnyVehicle(PlayerPedId(), false) then
             SetDisplay(true)
 
             if GetVehicleWindowTint(vehicle) == -1  then
