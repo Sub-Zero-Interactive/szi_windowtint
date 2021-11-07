@@ -2,7 +2,7 @@
 This is a script that allows police to check vehicle window tints.
 
 ## Requirements
-- [es_extended](https://github.com/esx-framework/es_extended/tree/legacy)
+- [QBCore](https://github.com/qbcore-framework/)
 
 ## Download & Installation
 
