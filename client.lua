@@ -22,8 +22,24 @@ SOFTWARE.
 local tint = nil
 local display = false
 
+-- Gets a vehicle in a certain direction
+-- Credit to Konijima
+function GetVehicleInDirection( coordFrom, coordTo )
+    local rayHandle = CastRayPointToPoint( coordFrom.x, coordFrom.y, coordFrom.z, coordTo.x, coordTo.y, coordTo.z, 10, GetPlayerPed( -1 ), 0 )
+    local _, _, _, _, vehicle = GetRaycastResult( rayHandle )
+    return vehicle
+end
+
 RegisterCommand("checktint", function()
+             local playerPos = GetEntityCoords( PlayerPedId(), 1 )
+            local inFrontOfPlayer = GetOffsetFromEntityInWorldCoords( PlayerPedId(), 0.0, 5.0, 0.0 )
+
         if IsPedInAnyVehicle(PlayerPedId(), false) then
+           local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
+         elseif GetVehicleInDirection( playerPos, inFrontOfPlayer ) then
+           local vehicle = GetVehicleInDirection( playerPos, inFrontOfPlayer )
+         end
+         if IsPedInAnyVehicle(PlayerPedId(), false) or GetVehicleInDirection( playerPos, inFrontOfPlayer ) then
             SetDisplay(true)
 
             if GetVehicleWindowTint(vehicle) == -1  then
@@ -82,13 +98,10 @@ function SetDisplay(bool)
     })
 end
 
+
 RegisterNUICallback("exit", function(data)
-    SetDisplay(false)
-    SendNUIMessage({
-        type = "data",
-        tint = 'None',
-        textColor = '--color-black'
-    })
+   SetNuiFocus(false, false)
+   print("closed?")
 end)
 
 RegisterNetEvent('szi_windowtint:displayTint')
