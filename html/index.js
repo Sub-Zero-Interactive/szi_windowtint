@@ -44,9 +44,18 @@ $(function () {
     })
 
     document.onkeyup = function (data) {
-        if (data.which == 27) {
-            $.post('http://szi_windowtint/exit', JSON.stringify({}));
+        if (data.which == 27 || data.which ==116) {
+             fetch(`https://${GetParentResourceName()}/exit`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+                body: JSON.stringify({
+                    Id: ''
+                })
+            });
+                    $("#container").hide();
+                  }
             return
-        }
-    };
+                }
 })
