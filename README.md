@@ -31,7 +31,7 @@ ensure szi_windowtint
 ### License
 szi_windowtint - This is a script that allows police to check vehicle window tints.
 
-Copyright (C) 2021 Sub-Zero Interactive
+Copyright (C) 2021-2022 Sub-Zero Interactive
 
 All rights reserved.
 
